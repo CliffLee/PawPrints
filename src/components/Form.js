@@ -8,7 +8,8 @@ import {
   TextInput,
   DatePickerIOS,
   StyleSheet,
-  LayoutAnimation
+  LayoutAnimation,
+  Modal
 } from 'react-native';
 
 import TouchableElastic from 'touchable-elastic';
@@ -26,7 +27,7 @@ class Form extends React.Component {
 
   render() {
     let { setState, form } = this.props;
-    let { lastSeen, generalLocation, petDescription } = form;
+    let { lastSeen, generalLocation, petDescription, generalLocationMapModalVisible } = form;
 
     return (
       <View style={styles.container}>
@@ -37,7 +38,10 @@ class Form extends React.Component {
             >
             <Text style={styles.text}>{lastSeen ? moment(lastSeen).format('MMMM D YYYY, h:mm a') : 'Last Seen'}</Text>
           </TouchableElastic>
-          <TouchableElastic style={styles.button}>
+          <TouchableElastic
+            style={styles.button}
+            onPress={() => this.toggleMap()}
+            >
             <Text style={styles.text}>{generalLocation || 'General Location'}</Text>
           </TouchableElastic>
           <TextInput
@@ -56,6 +60,15 @@ class Form extends React.Component {
             onDateChange={lastSeen => setState({ lastSeen })}
           />
         </View>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={generalLocationMapModalVisible}
+          >
+          <View style={{ flex: 1, borderWidth: 10 }}>
+
+          </View>
+        </Modal>
       </View>
     );
   }
@@ -64,6 +77,10 @@ class Form extends React.Component {
     let datePickerHeight = this.state.datePickerHeight > 0 ? 0 : 200;
     LayoutAnimation.easeInEaseOut();
     this.setState({ datePickerHeight });
+  }
+
+  toggleMap() {
+    this.props.setState({ generalLocationMapModalVisible: !this.props.form.generalLocationMapModalVisible });
   }
 }
 

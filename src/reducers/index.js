@@ -7,7 +7,8 @@ import {
 const defaultFormState = {
   lastSeen: null,
   generalLocation: null,
-  petDescription: ''
+  petDescription: '',
+  generalLocationMapModalVisible: false
 };
 
 const rootReducer = combineReducers({
