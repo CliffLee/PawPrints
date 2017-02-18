@@ -16,9 +16,9 @@ export default class Main extends React.Component {
     return (
       <Navigator
         initialRoute={{ title: 'Login' }}
-        renderScene={route => {
+        renderScene={(route, navigator) => {
           let Component = ROUTES[route.title];
-          return (<Component />);
+          return (<Component navigator={navigator} />);
         }}
       />
     );
