@@ -51,6 +51,12 @@ class Form extends React.Component {
             value={petDescription}
             onChangeText={petDescription => setState({ petDescription })}
           />
+          <TouchableElastic
+            onPress={() => this.submit()}
+            style={styles.submitButton}
+            >
+            <Text>Submit</Text>
+          </TouchableElastic>
         </View>
         <View style={[styles.datePicker, { height: this.state.datePickerHeight }]}>
           <DatePickerIOS
@@ -82,6 +88,10 @@ class Form extends React.Component {
   toggleMap() {
     this.props.setState({ generalLocationMapModalVisible: !this.props.form.generalLocationMapModalVisible });
   }
+
+  submit() {
+
+  }
 }
 
 const styles = StyleSheet.create({
@@ -106,6 +116,10 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderColor: 'gray',
     justifyContent: 'center'
+  },
+  submitButton: {
+    borderWidth: 1,
+    padding: 10
   }
 });
 
