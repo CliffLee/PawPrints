@@ -1,4 +1,7 @@
 import React from 'react';
+import moment from 'moment';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import {
   View,
   Text,
@@ -9,8 +12,11 @@ import {
 } from 'react-native';
 
 import TouchableElastic from 'touchable-elastic';
+import {
+  setFormState
+} from '../actions';
 
-export default class Main extends React.Component {
+class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,6 +25,9 @@ export default class Main extends React.Component {
   }
 
   render() {
+    let { setState, form } = this.props;
+    let { lastSeen, generalLocation, petDescription } = form;
+
     return (
       <View style={styles.container}>
         <View style={[styles.container, { padding: 30 }]}>
@@ -26,21 +35,25 @@ export default class Main extends React.Component {
             style={styles.button}
             onPress={() => this.toggleDatePicker()}
             >
-            <Text style={styles.text}>Last Seen</Text>
+            <Text style={styles.text}>{lastSeen ? moment(lastSeen).format('MMMM D YYYY, h:mm a') : 'Last Seen'}</Text>
           </TouchableElastic>
           <TouchableElastic style={styles.button}>
-            <Text style={styles.text}>General Location</Text>
+            <Text style={styles.text}>{generalLocation || 'General Location'}</Text>
           </TouchableElastic>
           <TextInput
             style={[styles.multilineInput, styles.text]}
             placeholder="Pet Description"
             multiline={true}
+            value={petDescription}
+            onChangeText={petDescription => setState({ petDescription })}
           />
         </View>
         <View style={[styles.datePicker, { height: this.state.datePickerHeight }]}>
           <DatePickerIOS
             mode="datetime"
-            date={new Date()}
+            maximumDate={new Date()}
+            date={lastSeen || new Date()}
+            onDateChange={lastSeen => setState({ lastSeen })}
           />
         </View>
       </View>
@@ -48,7 +61,7 @@ export default class Main extends React.Component {
   }
 
   toggleDatePicker() {
-    let datePickerHeight = this.state.datePickerHeight > 0 ? 0 : 220;
+    let datePickerHeight = this.state.datePickerHeight > 0 ? 0 : 200;
     LayoutAnimation.easeInEaseOut();
     this.setState({ datePickerHeight });
   }
@@ -66,13 +79,29 @@ const styles = StyleSheet.create({
   multilineInput: {
     height: 100,
     borderWidth: 1,
-    marginBottom: 10
+    marginBottom: 10,
+    padding: 5
   },
   text: {
     fontSize: 20
   },
   datePicker: {
     borderTopWidth: 1,
-    borderColor: 'gray'
+    borderColor: 'gray',
+    justifyContent: 'center'
   }
 });
+
+function mapStateToProps({ form }) {
+  return {
+    form
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    setState: setFormState
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form);

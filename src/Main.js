@@ -1,9 +1,12 @@
+console.disableYellowBox = true;
 import React from 'react';
 import {
   Navigator
 } from 'react-native';
-console.disableYellowBox = true;
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
 
+import rootReducer from './reducers';
 import Login from './components/Login';
 import Map from './components/Map';
 import Form from './components/Form';
@@ -14,16 +17,22 @@ const ROUTES = {
   Form
 };
 
+const store = createStore(
+  rootReducer
+);
+
 export default class Main extends React.Component {
   render() {
     return (
-      <Navigator
-        initialRoute={{ title: 'Login' }}
-        renderScene={(route, navigator) => {
-          let Component = ROUTES[route.title];
-          return (<Component navigator={navigator} />);
-        }}
-      />
+      <Provider store={store}>
+        <Navigator
+          initialRoute={{ title: 'Login' }}
+          renderScene={(route, navigator) => {
+            let Component = ROUTES[route.title];
+            return (<Component navigator={navigator} />);
+          }}
+        />
+      </Provider>
     );
   }
 }
