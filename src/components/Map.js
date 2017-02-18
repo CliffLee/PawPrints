@@ -1,4 +1,6 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import {
   View,
   Text
@@ -7,8 +9,9 @@ import {
 import MapView from 'react-native-maps';
 
 import { getUserLocation } from '../utils'
+import { setInitialRegion, setUserState, setMapState } from '../actions';
 
-export default class Main extends React.Component {
+class Map extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', backgroundColor: '#fff' }}>
@@ -23,7 +26,23 @@ export default class Main extends React.Component {
   componentDidMount() {
     getUserLocation(location => {
       console.log('LOCATION', location)
-
+      this.props.setUserState({ location });
     });
   }
 }
+
+function mapStateToProps({ map }) {
+  return {
+    map
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    setInitialRegion,
+    setUserState,
+    setState: setMapState
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Map);

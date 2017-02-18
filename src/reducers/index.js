@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import {
   SET_FORM_STATE,
   SET_INITIAL_REGION,
+  SET_MAP_STATE,
   SET_USER_STATE
 } from '../actions'
 
@@ -11,6 +12,10 @@ const defaultFormState = {
   generalLocation: null,
   petDescription: '',
   generalLocationMapModalVisible: false
+};
+
+const defaultMapState = {
+  animalsWithinRegion: []
 };
 
 const deaultUserState = {
@@ -22,12 +27,25 @@ const deaultUserState = {
 
 const rootReducer = combineReducers({
   form: formReducer,
+  map: mapReducer,
   initialRegion: initialRegionReducer
 });
 
 function formReducer(state = defaultFormState, action) {
   switch (action.type) {
     case SET_FORM_STATE:
+      return {
+        ...state,
+        ...action.payload
+      };
+    default:
+      return state;
+  }
+}
+
+function mapReducer(state = defaultMapState, action) {
+  switch (action.type) {
+    case SET_MAP_STATE:
       return {
         ...state,
         ...action.payload
