@@ -3,7 +3,8 @@ import {
   View,
   Text,
   TextInput,
-  DatePickerIos
+  DatePickerIos,
+  StyleSheet
 } from 'react-native';
 
 import TouchableElastic from 'touchable-elastic';
@@ -11,16 +12,16 @@ import TouchableElastic from 'touchable-elastic';
 export default class Main extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', padding: 30, backgroundColor: '#fff' }}>
+      <View style={styles.container}>
         <Text>Last Seen</Text>
-        <TouchableElastic style={{ borderWidth: 1, marginBottom: 10 }}>
-          <Text style={{ fontSize: 20 }}>Time</Text>
+        <TouchableElastic style={styles.button}>
+          <Text style={styles.text}>Time</Text>
         </TouchableElastic>
-        <TouchableElastic style={{ borderWidth: 1, marginBottom: 40 }}>
-          <Text style={{ fontSize: 20 }}>Location</Text>
+        <TouchableElastic style={styles.button}>
+          <Text style={styles.text}>Location</Text>
         </TouchableElastic>
         <TextInput
-          style={{ borderWidth: 1, height: 100, padding: 5, fontSize: 20 }}
+          style={styles.multilineInput}
           placeholder="description"
           multiline={true}
         />
@@ -29,4 +30,22 @@ export default class Main extends React.Component {
   }
 }
 
-// const styles = StyleSheat.c
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 30,
+    backgroundColor: '#fff'
+},
+  button: {
+    borderWidth: 1, marginBottom: 10
+  },
+  multilineInput: {
+    height: 100,
+    borderWidth: 1,
+    marginBottom: 10
+  },
+  text: {
+    fontSize: 20
+  }
+});
