@@ -2,13 +2,16 @@ import React from 'react';
 import {
   Navigator
 } from 'react-native';
+console.disableYellowBox = true;
 
 import Login from './components/Login';
 import Map from './components/Map';
+import Form from './components/Form';
 
 const ROUTES = {
   Login,
-  Map
+  Map,
+  Form
 };
 
 export default class Main extends React.Component {
@@ -16,9 +19,9 @@ export default class Main extends React.Component {
     return (
       <Navigator
         initialRoute={{ title: 'Login' }}
-        renderScene={route => {
+        renderScene={(route, navigator) => {
           let Component = ROUTES[route.title];
-          return (<Component />);
+          return (<Component navigator={navigator} />);
         }}
       />
     );
