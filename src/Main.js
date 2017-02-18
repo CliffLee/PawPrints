@@ -5,10 +5,12 @@ import {
 
 import Login from './components/Login';
 import Map from './components/Map';
+import Form from './components/Form';
 
 const ROUTES = {
   Login,
-  Map
+  Map,
+  Form
 };
 
 export default class Main extends React.Component {
