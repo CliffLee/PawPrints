@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 
 import {
-  SET_FORM_STATE
+  SET_FORM_STATE,
+  SET_INITIAL_REGION,
+  SET_USER_STATE
 } from '../actions'
 
 const defaultFormState = {
@@ -11,8 +13,16 @@ const defaultFormState = {
   generalLocationMapModalVisible: false
 };
 
+const deaultUserState = {
+  location: {
+    latitude: 0,
+    longitude: 0
+  }
+};
+
 const rootReducer = combineReducers({
-  form: formReducer
+  form: formReducer,
+  initialRegion: initialRegionReducer
 });
 
 function formReducer(state = defaultFormState, action) {
@@ -22,6 +32,15 @@ function formReducer(state = defaultFormState, action) {
         ...state,
         ...action.payload
       };
+    default:
+      return state;
+  }
+}
+
+function initialRegionReducer(state = null, action) {
+  switch (action.type) {
+    case SET_INITIAL_REGION:
+      return action.payload;
     default:
       return state;
   }
