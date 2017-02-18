@@ -1,0 +1,3 @@
+rootProject.name = 'PawPrints'
+
+include ':app'
