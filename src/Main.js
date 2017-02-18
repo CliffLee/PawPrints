@@ -29,6 +29,7 @@ export default class Main extends React.Component {
       <Provider store={store}>
         <Navigator
           initialRoute={{ title: 'Loading' }}
+          configureScene={(route, navigator) => Navigator.SceneConfigs.FadeAndroid}
           renderScene={(route, navigator) => {
             let Component = ROUTES[route.title];
             return (<Component navigator={navigator} />);
