@@ -22,6 +22,6 @@ export default class Main extends React.Component {
 
   login() {
     // auth stuff
-    this.props.navigator.push({ title: 'Form' });
+    this.props.navigator.push({ title: 'Map' });
   }
 }
