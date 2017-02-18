@@ -2,8 +2,13 @@ import express from 'express';
 
 const router = express.Router();
 
-router.get('/nearby', (req,res,next) => {
-  console.log(req);
+/*
+ * GET /api/found/
+ *
+ * returns a list of max 10 nearby lost pets
+ */
+router.get('/', (req,res,next) => {
+  
 });
 
 export default router;
