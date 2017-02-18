@@ -1,0 +1,5 @@
+{
+  "GCLOUD_PROJECT": "pawprints-159112",
+  "DATA_BACKEND": "datastore",
+  "CLOUD_BUCKET": "lost_imgs"
+}
