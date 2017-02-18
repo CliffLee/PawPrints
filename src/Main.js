@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Navigator
 } from 'react-native';
+console.disableYellowBox = true;
 
 import Login from './components/Login';
 import Map from './components/Map';
