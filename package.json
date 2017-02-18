@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "gulp",
+    "start": "dist/bin/www",
     "test": "jest",
     "ios": "react-native run-ios",
     "android": "react-native run-android",
