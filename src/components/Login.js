@@ -1,7 +1,8 @@
 import React from 'react';
 import {
   View,
-  Text
+  Text,
+  StyleSheet
 } from 'react-native';
 
 import TouchableElastic from 'touchable-elastic';
@@ -11,7 +12,7 @@ export default class Main extends React.Component {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
         <TouchableElastic
-          style={{ borderWidth: 1, padding: 15, borderRadius: 5 }}
+          style={styles.button}
           onPress={() => this.login()}
           >
           <Text>Login</Text>
@@ -25,3 +26,13 @@ export default class Main extends React.Component {
     this.props.navigator.push({ title: 'Map' });
   }
 }
+
+const styles = StyleSheet.create({
+
+	button: {
+		borderWidth: 1,
+		padding: 15,
+		borderRadius: 5
+	}
+
+});

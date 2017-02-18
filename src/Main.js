@@ -7,11 +7,13 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 
 import rootReducer from './reducers';
+import Loading from './components/Loading';
 import Login from './components/Login';
 import Map from './components/Map';
 import Form from './components/Form';
 
 const ROUTES = {
+  Loading,
   Login,
   Map,
   Form
@@ -26,7 +28,7 @@ export default class Main extends React.Component {
     return (
       <Provider store={store}>
         <Navigator
-          initialRoute={{ title: 'Login' }}
+          initialRoute={{ title: 'Loading' }}
           renderScene={(route, navigator) => {
             let Component = ROUTES[route.title];
             return (<Component navigator={navigator} />);
