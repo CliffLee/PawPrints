@@ -194,13 +194,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 10,
     borderRadius: 20,
-    padding: 10,
+    padding: 0,
     paddingLeft: 10,
     borderColor: '#fff',
+    height: 40,
     alignItems: 'flex-start'
   },
   multilineInput: {
-    height: 100,
+    height: 80,
     borderWidth: 1,
     marginBottom: 10,
     padding: 10,
@@ -208,7 +209,7 @@ const styles = StyleSheet.create({
     borderColor: '#fff'
   },
   text: {
-    fontSize: 14,
+    fontSize: 12,
     color: '#b37414'
   },
   submitText: {
