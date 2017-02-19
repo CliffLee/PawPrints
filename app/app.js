@@ -18,5 +18,4 @@ app.use('/api/lost', require('./routes/api/lost').default);
 app.get('/', (req,res) => {
   res.send("Hello World");
 });
-
 export default app;
