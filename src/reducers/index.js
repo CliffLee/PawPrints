@@ -39,7 +39,7 @@ const rootReducer = combineReducers({
   form: formReducer,
   map: mapReducer,
   capture: captureReducer,
-  initialRegion: initialRegionReducer
+  initialRegion: initialRegionReducer,
 });
 
 function listingReducer(state = defaultListingState, action){
