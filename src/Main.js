@@ -15,12 +15,14 @@ const {
 import rootReducer from './reducers';
 import Loading from './components/Loading';
 import Login from './components/Login';
+import Menu from './components/Menu';
 import Map from './components/Map';
 import Form from './components/Form';
 
 const ROUTES = {
   Loading,
   Login,
+  Menu,
   Map,
   Form
 };
@@ -41,7 +43,7 @@ export default class Main extends React.Component {
     AccessToken.getCurrentAccessToken()
       .then(data => {
         if (data) {
-          this.setState({ routeTitleAfterLoading: 'Map' });
+          this.setState({ routeTitleAfterLoading: 'Menu' });
           AccessToken.refreshCurrentAccessTokenAsync();
         } else {
           this.setState({ routeTitleAfterLoading: 'Login' });
