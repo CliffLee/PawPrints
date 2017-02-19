@@ -12,6 +12,7 @@ import {
   Modal
 } from 'react-native';
 
+import MapView from 'react-native-maps';
 import TouchableElastic from 'touchable-elastic';
 import {
   setFormState
@@ -34,14 +35,12 @@ class Form extends React.Component {
         <View style={[styles.container, { padding: 30 }]}>
           <TouchableElastic
             style={styles.button}
-            onPress={() => this.toggleDatePicker()}
-            >
+            onPress={() => this.toggleDatePicker()}>
             <Text style={styles.text}>{lastSeen ? moment(lastSeen).format('MMMM D YYYY, h:mm a') : 'Last Seen'}</Text>
           </TouchableElastic>
           <TouchableElastic
             style={styles.button}
-            onPress={() => this.toggleMap()}
-            >
+            onPress={() => this.toggleMap()}>
             <Text style={styles.text}>{generalLocation || 'General Location'}</Text>
           </TouchableElastic>
           <TextInput
@@ -49,12 +48,10 @@ class Form extends React.Component {
             placeholder="Pet Description"
             multiline={true}
             value={petDescription}
-            onChangeText={petDescription => setState({ petDescription })}
-          />
+            onChangeText={petDescription => setState({ petDescription })}/>
           <TouchableElastic
             onPress={() => this.submit()}
-            style={styles.submitButton}
-            >
+            style={styles.submitButton}>
             <Text>Submit</Text>
           </TouchableElastic>
         </View>
@@ -63,8 +60,7 @@ class Form extends React.Component {
             mode="datetime"
             maximumDate={new Date()}
             date={lastSeen || new Date()}
-            onDateChange={lastSeen => setState({ lastSeen })}
-          />
+            onDateChange={lastSeen => setState({ lastSeen })}/>
         </View>
         <Modal
           animationType="slide"
@@ -72,7 +68,10 @@ class Form extends React.Component {
           visible={generalLocationMapModalVisible}
           >
           <View style={{ flex: 1, borderWidth: 10 }}>
-
+            <MapView
+              style={{ flex: 1 }}
+              // initialRegion={}
+              />
           </View>
         </Modal>
       </View>

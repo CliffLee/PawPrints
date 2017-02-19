@@ -4,7 +4,8 @@ import {
   SET_FORM_STATE,
   SET_INITIAL_REGION,
   SET_MAP_STATE,
-  SET_USER_STATE
+  SET_USER_STATE,
+  SET_CAPTURE_STATE
 } from '../actions'
 
 const defaultFormState = {
@@ -25,9 +26,14 @@ const deaultUserState = {
   }
 };
 
+const defaultCaptureState = {
+  imagePath: ''
+};
+
 const rootReducer = combineReducers({
   form: formReducer,
   map: mapReducer,
+  capture: captureReducer,
   initialRegion: initialRegionReducer
 });
 
@@ -46,6 +52,18 @@ function formReducer(state = defaultFormState, action) {
 function mapReducer(state = defaultMapState, action) {
   switch (action.type) {
     case SET_MAP_STATE:
+      return {
+        ...state,
+        ...action.payload
+      };
+    default:
+      return state;
+  }
+}
+
+function captureReducer(state = defaultCaptureState, action) {
+  switch (action.type) {
+    case SET_CAPTURE_STATE:
       return {
         ...state,
         ...action.payload
