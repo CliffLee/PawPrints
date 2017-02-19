@@ -70,8 +70,7 @@ class Map extends React.Component {
               <MapView.Marker
                 key={i}
                 coordinate={data.latlong}
-                >
-
+                image={require('../resources/images/icons/paw-o.png')}>
               </MapView.Marker>
             );
           })}

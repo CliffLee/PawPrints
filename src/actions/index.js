@@ -14,8 +14,8 @@ function getLostListing(){
   const url = 'https://pawprints-159112.appspot-preview.com/api/lost/nearby';
   var request = axios.get(url);
 
-  console.log('getting lost listing')
-  console.log(request);
+  //console.log('getting lost listing')
+  //console.log(request);
 
   return {
     type: GET_LOST_LISTING,
