@@ -12,12 +12,12 @@ const {
 } = FBSDK;
 
 
-import rootReducer from './reducers';
-import Login from './components/Login';
-import Menu from './components/Menu';
-import Map from './components/Map';
-import Form from './components/Form';
-import Capture from './components/Capture';
+import rootReducer from '../reducers';
+import Login from './Login';
+import Menu from './Menu';
+import Map from '../containers/Map';
+import Form from '../containers/Form';
+import Capture from '../containers/Capture';
 
 const ROUTES = {
   Login,
