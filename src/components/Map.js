@@ -15,39 +15,39 @@ class Map extends React.Component {
 
   constructor(props){
     super(props);
-    this.state = {initialRegion: null};
+    this.state = {region: null};
+  }
+
+  getInitialState(){
+    var initLat = this.state.region.latitude,
+        initLong = this.state.region.longitude;
+
+    return {
+        latitude: initLat,
+        longitude: initLong,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421
+      };
+  }
+
+  onRegionChange(region){
+    this.setState({region});
   }
 
   render() {
 
-    var initLat = null,
-        initLong = null;
-
-    if(this.state.initialRegion == null){
+    if(this.state.region == null){
       return (
           <View style={{ flex: 1, justifyContent: 'center', backgroundColor: '#fff' }}>
           </View>
       );
     }
-
-    initLat = this.state.initialRegion.latitude;
-    initLong = this.state.initialRegion.longitude;
-
-    console.log(initLat);
-    console.log(initLong)
-
     return (
       <View style={{ flex: 1, justifyContent: 'center', backgroundColor: '#fff' }}>
-
         <MapView
           style={{ flex: 1 }}
-            initialRegion={{
-                          latitude: initLat,
-                          longitude: initLong,
-                          latitudeDelta: 0.0922,
-                          longitudeDelta: 0.0421
-                        }}
-        />
+          onRegionChangeComplete={this.onRegionChange.bind(this)}
+          initialRegion={this.getInitialState()}/>
       </View>
     );
   }
@@ -56,7 +56,7 @@ class Map extends React.Component {
     getUserLocation(location => {
       console.log('LOCATION', location)
       this.props.setUserState({ location });
-      this.setState({initialRegion: location})
+      this.setState({region: location})
     });
   }
 }
