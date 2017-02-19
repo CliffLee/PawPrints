@@ -1,26 +1,73 @@
-import React from 'react';
+import React, { PropTypes, Component } from 'react';
+
+const FBSDK = require('react-native-fbsdk');
+const {
+  LoginButton,
+  AccessToken
+} = FBSDK;
+
 import {
   View,
   Text,
   StyleSheet,
-  Image
+  Image,
+  Animated,
+  Easing
 } from 'react-native';
 
 import TouchableElastic from 'touchable-elastic';
 
+
 export default class Main extends React.Component {
-  render() {
-    return (
-      <Image source={require('../resources/images/dog.png')} style={styles.container}>
-      	<Image
-			style={styles.image}
-			source={require('../resources/images/logo-white.png')}/>
-        <TouchableElastic
-          style={styles.button}
-          onPress={() => this.login()}
-          >
-          <Text style={styles.buttonText}>Login with Facebook</Text>
-        </TouchableElastic>
+
+
+	constructor(props){
+		super(props);
+
+		this.marginValue = new Animated.Value(-60);
+	}
+
+	componentDidMount(){
+		this.animateIn();
+	}
+
+
+	animateIn(){
+		Animated.timing(this.marginValue, 
+			{
+				toValue: 0,
+				duration: 300,
+				easing: Easing.ease
+			}).start();
+	}
+
+	render() {
+    	return (
+      	<Image source={require('../resources/images/dog.png')} style={styles.container}>
+      	<Animated.Image
+				style={[styles.image, {marginTop: this.marginValue}]}
+				source={require('../resources/images/logo-white.png')}/>
+      	<TouchableElastic>        	
+	      	<LoginButton
+	      	  style={styles.button}
+	          publishPermissions={["publish_actions"]}
+	          onLoginFinished={
+	            (error, result) => {
+	              if (error) {
+	                alert("login has error: " + result.error);
+	              } else if (result.isCancelled) {
+	                alert("login is cancelled.");
+	              } else {
+	                AccessToken.getCurrentAccessToken().then(
+	                  (data) => {
+	                    alert(data.accessToken.toString())
+	                  }
+	                )
+	              }
+	            }
+	          }
+	          onLogoutFinished={() => alert("logout.")}/>
+      		</TouchableElastic>
       </Image>
     );
   }
@@ -42,20 +89,15 @@ const styles = StyleSheet.create({
 	},
 
 	button: {
-		borderWidth: 0,
-		padding: 20,
-		borderRadius: 10,
-		width: 180,
-		backgroundColor: '#eb9c22'
-	},
+		backgroundColor: '#4469b0',
+		width: 200,
+		height: 30,
 
-	buttonText: {
-		color: '#fff'
 	},
 
 	image: {
 		width: 200,
-		height: 150
+		height: 150,
 	}
 
 });
