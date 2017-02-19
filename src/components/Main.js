@@ -18,13 +18,15 @@ import Menu from './Menu';
 import Map from '../containers/Map';
 import Form from '../containers/Form';
 import Capture from '../containers/Capture';
+import LostPetsList from '../containers/LostPetsList';
 
 const ROUTES = {
   Login,
   Menu,
   Map,
   Form,
-  Capture
+  Capture,
+  LostPetsList
 };
 
 const store = createStore(
