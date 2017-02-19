@@ -40,7 +40,7 @@ class Form extends React.Component {
 
   render() {
     let { setState, form } = this.props;
-    let { lastSeen, generalLocation, petDescription, generalLocationMapModalVisible } = form;
+    let { lastSeen, generalLocation, petDescription, generalLocationMapModalVisible, generalLocationAddress } = form;
 
     return (
       <TouchableWithoutFeedback onPress={() => this.closeDatePicker()}>
@@ -77,7 +77,7 @@ class Form extends React.Component {
                 onPress={() => this.toggleMap()}>
                 <Text style={styles.text}>
                   <Image style={styles.icon} source={require('../resources/images/icons/loc-o.png')}/>
-                  {generalLocation || 'General location'}
+                  {generalLocationAddress || 'General location'}
                 </Text>
               </TouchableElastic>
 
@@ -108,7 +108,7 @@ class Form extends React.Component {
             transparent={true}
             visible={generalLocationMapModalVisible}
             >
-            <View style={{ flex: 1, borderWidth: 10 }}>
+            <View style={{ flex: 1 }}>
               <Map select={true}/>
             </View>
           </Modal>

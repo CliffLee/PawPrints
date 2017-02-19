@@ -11,8 +11,8 @@ import {
 import TouchableElastic from 'touchable-elastic';
 import MapView from 'react-native-maps';
 
-import { getUserLocation } from '../utils'
-import { setInitialRegion, setUserState, setMapState } from '../actions';
+import { getUserLocation, getAddress } from '../utils'
+import { setInitialRegion, setUserState, setMapState, setFormState } from '../actions';
 import { width, height } from '../globalStyles';
 
 class Map extends React.Component {
@@ -46,8 +46,17 @@ class Map extends React.Component {
           </View>
       );
     }
+
+    let centerMarker = this.props.select ? (
+      <Image
+        style={{ height: 40, width: 40, position: 'absolute', zIndex: 99, left: width / 2 - 20, top: (height - 180) / 2 }}
+        source={require('../resources/images/icons/paw.png')}
+      />
+    ) : null;
+
     return (
       <View style={{ flex: 1, justifyContent: 'center', backgroundColor: '#fff' }}>
+        {centerMarker}
         <MapView
           style={{ flex: 1 }}
           onRegionChangeComplete={this.onRegionChange.bind(this)}
@@ -64,13 +73,15 @@ class Map extends React.Component {
           </Text>
         </TouchableElastic>}
         {
-          this.props.select && 
+          this.props.select &&
           <View style={styles.locationBox}>
             <Image style={styles.icon} source={require('../resources/images/icons/loc-o.png')}/>
             <Text style={styles.locationText}>Longitude:{this.state.region.longitude}</Text>
             <Text style={styles.locationText}>Latitude: {this.state.region.latitude}</Text>
             <TouchableElastic
-              style={styles.petFoundButton}>
+              style={styles.petFoundButton}
+              onPress={() => this.onHere()}
+              >
              <Text style={styles.petFoundText}>HERE</Text>
             </TouchableElastic>
           </View>
@@ -84,6 +95,22 @@ class Map extends React.Component {
       console.log('LOCATION', location)
       this.props.setUserState({ location });
       this.setState({region: location})
+    });
+  }
+
+  onHere() {
+    let { latitude, longitude } = this.state.region;
+    getAddress(latitude, longitude, address => {
+      this.props.setFormState({
+        generalLocationAddress: address
+      });
+    });
+    this.props.setFormState({
+      generalLocation: {
+        lat: latitude,
+        lon: longitude
+      },
+      generalLocationMapModalVisible: false
     });
   }
 }
@@ -132,6 +159,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     setInitialRegion,
     setUserState,
+    setFormState,
     setState: setMapState
   }, dispatch);
 }
