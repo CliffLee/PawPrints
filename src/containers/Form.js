@@ -43,7 +43,10 @@ class Form extends React.Component {
       <View style={styles.containerOuter}>
 
         <View style={styles.containerHeader}>
-          <Text style={styles.textHeader}>Tell us more.</Text>
+          <Text style={styles.textHeader}>
+            <Image style={styles.logo} source={require('../resources/images/logo-white-img.png')}/>
+            Tell us more.
+          </Text>
         </View>
 
         <TouchableElastic style={styles.carousel}>
@@ -57,7 +60,7 @@ class Form extends React.Component {
               style={[styles.button, {marginTop: -40}]}
               onPress={() => this.toggleDatePicker()}>
               <Text style={styles.text}>
-                <Image style={styles.icon} source={require('../resources/images/icons/time.png')}/>
+                <Image style={styles.icon} source={require('../resources/images/icons/time-o.png')}/>
                 {lastSeen ? moment(lastSeen).format('MMMM D YYYY, h:mm a') : 'When last seen'}
               </Text>
             </TouchableElastic>
@@ -66,8 +69,8 @@ class Form extends React.Component {
               style={styles.button}
               onPress={() => this.toggleMap()}>
               <Text style={styles.text}>
-                <Image style={styles.icon} source={require('../resources/images/icons/loc.png')}/>
-                {generalLocation || 'General Location'}
+                <Image style={styles.icon} source={require('../resources/images/icons/loc-o.png')}/>
+                {generalLocation || 'General location'}
               </Text>
             </TouchableElastic>
 
@@ -162,8 +165,8 @@ const styles = StyleSheet.create({
     width
   },
   image:{
-    width: 200,
-    height: 200
+    width: 170,
+    height: 100
   },
   container: {
     flex: 1,
@@ -192,7 +195,7 @@ const styles = StyleSheet.create({
     height: 100,
     borderWidth: 1,
     marginBottom: 10,
-    padding: 5,
+    padding: 10,
     borderRadius: 20,
     borderColor: '#fff'
   },
@@ -201,7 +204,9 @@ const styles = StyleSheet.create({
     color: '#b37414'
   },
   submitText: {
-    color: '#fff'
+    color: '#fff',
+    fontWeight: 'bold',
+    letterSpacing: 2
   },
   datePicker: {
     borderTopWidth: 1,
@@ -215,6 +220,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     height: 50
+  },
+  logo:{
+    height: 30,
+    width: 40,
+    marginRight: 10
   },
   icon: {
     height: 12,
