@@ -4,12 +4,18 @@ import {
   View,
   Image,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  StyleSheet
 } from 'react-native';
 
 import { height, width } from '../globalStyles'
 
 class PetDetail extends React.Component {
+
+  sendEmail(){
+    this.props.navigator.push({ title: 'Email' });
+  }
+
   render() {
     let { data } = this.props;
     return (
@@ -59,7 +65,7 @@ class PetDetail extends React.Component {
           </View>*/}
         </View>
 
-        <TouchableOpacity style={styles.found}>
+        <TouchableOpacity style={styles.found} onPress={() => this.sendEmail()}>
           <Text style={styles.foundText}>{`I FOUND SCOOBS!!!`}</Text>
         </TouchableOpacity>
       </View>
@@ -67,7 +73,7 @@ class PetDetail extends React.Component {
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
 
   container: {
     flex: 1,
@@ -122,7 +128,7 @@ const styles = {
     fontWeight: 'bold',
   }
 
-}
+});
 
 
 function mapStateToProps({ capture, lostPets }) {

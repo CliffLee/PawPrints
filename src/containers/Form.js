@@ -17,6 +17,8 @@ import {
 
 import { width } from '../globalStyles';
 
+import { postLostAnimal } from '../actions';
+
 const FBSDK = require('react-native-fbsdk');
 const {
   LoginButton,
@@ -34,8 +36,13 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      datePickerHeight: 0
+      datePickerHeight: 0,
     }
+  }
+
+  handleFormSubmit(){
+    this.props.postLostAnimal(this.props.form);
+    this.props.navigator.push({title: 'Map'});
   }
 
   render() {
@@ -89,7 +96,7 @@ class Form extends React.Component {
                 onChangeText={petDescription => setState({ petDescription })} />
 
               <TouchableOpacity
-                onPress={() => this.submit()}
+                onPress={() => this.handleFormSubmit()}
                 style={styles.submitButton}>
                 <Text style={styles.submitText}>SUBMIT</Text>
               </TouchableOpacity>
@@ -131,10 +138,6 @@ class Form extends React.Component {
 
   toggleMap() {
     this.props.setState({ generalLocationMapModalVisible: !this.props.form.generalLocationMapModalVisible });
-  }
-
-  submit() {
-
   }
 }
 
@@ -257,6 +260,7 @@ function mapStateToProps({ form }) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     setState: setFormState,
+    postLostAnimal
   }, dispatch);
 }
 

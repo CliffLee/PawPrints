@@ -24,16 +24,18 @@ function getLostListing(){
 
 }
 
-function postLostAnimal(){
+function postLostAnimal(state){
   const url = 'https://pawprints-159112.appspot.com/api/lost/add';
-  var request = axios.get(url);
+  var request = axios.post(url, state);
 
-  // return {
-  //   type: POST_LOST_ANIMAL,
-  //   payload: request
-  // }
+  console.log('posting...')
 
-  return createAction(POST_LOST_ANIMAL, )
+   return {
+     type: POST_LOST_ANIMAL,
+     payload: request
+   }
+
+ // return createAction(POST_LOST_ANIMAL, )
 
 }
 

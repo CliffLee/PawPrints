@@ -16,6 +16,7 @@ const {
 import rootReducer from '../reducers';
 import Login from './Login';
 import Menu from './Menu';
+import Email from './Email';
 import Map from '../containers/Map';
 import Form from '../containers/Form';
 import Capture from '../containers/Capture';
@@ -31,7 +32,8 @@ const ROUTES = {
   Capture,
   LostPetsList,
   PetMatcher,
-  PetDetail
+  PetDetail,
+  Email
 };
 
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
@@ -77,8 +79,7 @@ export default class Main extends React.Component {
             return (
               <Component
                 navigator={navigator}
-                data={route.data}
-              />
+                data={route.data}/>
             );
           }}
         />
