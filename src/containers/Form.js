@@ -10,7 +10,8 @@ import {
   StyleSheet,
   LayoutAnimation,
   Modal,
-  Image
+  Image,
+  TouchableWithoutFeedback
 } from 'react-native';
 
 import { width } from '../globalStyles';
@@ -41,55 +42,59 @@ class Form extends React.Component {
     let { lastSeen, generalLocation, petDescription, generalLocationMapModalVisible } = form;
 
     return (
-      <View style={styles.containerOuter}>
+      <TouchableWithoutFeedback onPress={() => this.closeDatePicker()}>
 
-        <View style={styles.containerHeader}>
-          <Text style={styles.textHeader}>
-            <Image style={styles.logo} source={require('../resources/images/logo-white-img.png')}/>
-            Tell us more.
-          </Text>
-        </View>
+        <View style={styles.containerOuter}>
 
-        <TouchableElastic style={styles.carousel}>
-          <Image style={styles.image} source={require('../resources/images/upload.png')}/>
-        </TouchableElastic>
-
-        <View style={styles.container}>
-          <View style={[styles.container, { paddingRight: 30, paddingLeft: 30 }]}>
-
-            <TouchableElastic
-              style={[styles.button, {marginTop: -40}]}
-              onPress={() => this.toggleDatePicker()}>
-              <Text style={styles.text}>
-                <Image style={styles.icon} source={require('../resources/images/icons/time-o.png')}/>
-                {lastSeen ? moment(lastSeen).format('MMMM D YYYY, h:mm a') : 'When last seen'}
-              </Text>
-            </TouchableElastic>
-
-            <TouchableElastic
-              style={styles.button}
-              onPress={() => this.toggleMap()}>
-              <Text style={styles.text}>
-                <Image style={styles.icon} source={require('../resources/images/icons/loc-o.png')}/>
-                {generalLocation || 'General location'}
-              </Text>
-            </TouchableElastic>
-
-            <TextInput
-              style={[styles.multilineInput, styles.text]}
-              placeholder="Description of your pet."
-              multiline={true}
-              value={petDescription}
-              onChangeText={petDescription => setState({ petDescription })} />
-
-            <TouchableElastic
-              onPress={() => this.submit()}
-              style={styles.submitButton}>
-              <Text style={styles.submitText}>SUBMIT</Text>
-            </TouchableElastic>
-
+          <View style={styles.containerHeader}>
+            <Text style={styles.textHeader}>
+              <Image style={styles.logo} source={require('../resources/images/logo-white-img.png')}/>
+              Tell us more.
+            </Text>
           </View>
 
+          <View style={styles.carousel}>
+            <TouchableElastic>
+              <Image style={styles.image} source={require('../resources/images/upload.png')}/>
+            </TouchableElastic>
+          </View>
+
+          <View style={styles.container}>
+            <View style={[styles.container, { paddingRight: 30, paddingLeft: 30 }]}>
+
+              <TouchableElastic
+                style={[styles.button, {marginTop: -40}]}
+                onPress={() => this.toggleDatePicker()}>
+                <Text style={styles.text}>
+                  <Image style={styles.icon} source={require('../resources/images/icons/time-o.png')}/>
+                  {lastSeen ? moment(lastSeen).format('MMMM D YYYY, h:mm a') : 'When last seen'}
+                </Text>
+              </TouchableElastic>
+
+              <TouchableElastic
+                style={styles.button}
+                onPress={() => this.toggleMap()}>
+                <Text style={styles.text}>
+                  <Image style={styles.icon} source={require('../resources/images/icons/loc-o.png')}/>
+                  {generalLocation || 'General location'}
+                </Text>
+              </TouchableElastic>
+
+              <TextInput
+                style={[styles.multilineInput, styles.text]}
+                placeholder="Description of your pet."
+                multiline={true}
+                value={petDescription}
+                onChangeText={petDescription => setState({ petDescription })} />
+
+              <TouchableElastic
+                onPress={() => this.submit()}
+                style={styles.submitButton}>
+                <Text style={styles.submitText}>SUBMIT</Text>
+              </TouchableElastic>
+
+            </View>
+          </View>
           <View style={[styles.datePicker, { height: this.state.datePickerHeight }]}>
             <DatePickerIOS
               mode="datetime"
@@ -97,7 +102,6 @@ class Form extends React.Component {
               date={lastSeen || new Date()}
               onDateChange={lastSeen => setState({ lastSeen })}/>
           </View>
-
           <Modal
             animationType="slide"
             transparent={true}
@@ -107,9 +111,9 @@ class Form extends React.Component {
               <Map select={true}/>
             </View>
           </Modal>
-
         </View>
-      </View>
+      </TouchableWithoutFeedback>
+
     );
   }
 
@@ -117,6 +121,11 @@ class Form extends React.Component {
     let datePickerHeight = this.state.datePickerHeight > 0 ? 0 : 200;
     LayoutAnimation.easeInEaseOut();
     this.setState({ datePickerHeight });
+  }
+
+  closeDatePicker() {
+    LayoutAnimation.easeInEaseOut();
+    this.setState({ datePickerHeight: 0 });
   }
 
   toggleMap() {
@@ -207,9 +216,13 @@ const styles = StyleSheet.create({
     letterSpacing: 2
   },
   datePicker: {
+    width,
     borderTopWidth: 1,
     borderColor: 'gray',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    position: 'absolute',
+    bottom: 0,
+    backgroundColor: '#fff'
   },
   submitButton: {
     borderWidth: 0,
