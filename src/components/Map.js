@@ -3,13 +3,16 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
   View,
-  Text
+  Text,
+  StyleSheet
 } from 'react-native';
 
+import TouchableElastic from 'touchable-elastic';
 import MapView from 'react-native-maps';
 
 import { getUserLocation } from '../utils'
 import { setInitialRegion, setUserState, setMapState } from '../actions';
+import { width, height } from '../globalStyles';
 
 class Map extends React.Component {
 
@@ -50,6 +53,12 @@ class Map extends React.Component {
           initialRegion={this.getInitialState()}
           showsUserLocation={true}
         />
+        <TouchableElastic
+          style={styles.petFoundButton}
+          onPress={() => this.props.navigator.push({ title: 'Capture' })}
+          >
+          <Text style={styles.petFoundText}>Pet Found</Text>
+        </TouchableElastic>
       </View>
     );
   }
@@ -62,6 +71,20 @@ class Map extends React.Component {
     });
   }
 }
+
+const styles = StyleSheet.create({
+  petFoundButton: {
+    position: 'absolute',
+    width: 170,
+    height: 60,
+    left: width / 2 - 85,
+    bottom: 30,
+    backgroundColor: 'white',
+  },
+  petFoundText: {
+    fontSize: 26
+  }
+});
 
 function mapStateToProps({ map, initialRegion }) {
   return {

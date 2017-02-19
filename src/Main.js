@@ -17,12 +17,14 @@ import Loading from './components/Loading';
 import Login from './components/Login';
 import Map from './components/Map';
 import Form from './components/Form';
+import Capture from './components/Capture';
 
 const ROUTES = {
   Loading,
   Login,
   Map,
-  Form
+  Form,
+  Capture
 };
 
 const store = createStore(
