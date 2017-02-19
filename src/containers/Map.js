@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  Image
 } from 'react-native';
 
 import TouchableElastic from 'touchable-elastic';
@@ -51,13 +52,15 @@ class Map extends React.Component {
           style={{ flex: 1 }}
           onRegionChangeComplete={this.onRegionChange.bind(this)}
           initialRegion={this.getInitialRegion()}
-          showsUserLocation={true}
-        />
+          showsUserLocation={true}/>
         <TouchableElastic
           style={styles.petFoundButton}
           onPress={() => this.props.navigator.push({ title: 'Capture' })}
           >
-          <Text style={styles.petFoundText}>Pet Found</Text>
+           <Text style={styles.petFoundText}>
+            <Image style={styles.logo} source={require('../resources/images/logo-white-img.png')}/>
+            FOUND
+          </Text>
         </TouchableElastic>
       </View>
     );
@@ -75,14 +78,23 @@ class Map extends React.Component {
 const styles = StyleSheet.create({
   petFoundButton: {
     position: 'absolute',
-    width: 170,
-    height: 60,
-    left: width / 2 - 85,
+    width: 200,
+    height: 40,
+    left: width / 2 - 102,
     bottom: 30,
-    backgroundColor: 'white',
+    backgroundColor: '#eb9c22',
+    borderRadius: 100
   },
   petFoundText: {
-    fontSize: 26
+    fontSize: 20,
+    color: '#fff',
+    marginTop: -5
+  },
+  logo: {
+    width: 30,
+    height: 25,
+    marginRight: 10,
+    marginTop: 5
   }
 });
 

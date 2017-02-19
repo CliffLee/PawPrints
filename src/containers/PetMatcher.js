@@ -37,7 +37,7 @@ class PetMatcher extends React.Component {
               >
               <Image
                 style={{height: 30, width: 30}}
-                source={require('../resources/images/camera.png')}
+                source={require('../resources/images/icons/camera.png')}
               />
             </TouchableElastic>
           </Image>
