@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { createAction } from 'redux-actions';
 
 const SET_FORM_STATE = 'SET_FORM_STATE';
 const SET_INITIAL_REGION = 'SET_INITIAL_REGION';
@@ -27,10 +28,12 @@ function postLostAnimal(){
   const url = 'https://pawprints-159112.appspot.com/api/lost/add';
   var request = axios.get(url);
 
-  return {
-    type: POST_LOST_ANIMAL,
-    payload: request
-  }
+  // return {
+  //   type: POST_LOST_ANIMAL,
+  //   payload: request
+  // }
+
+  return createAction(POST_LOST_ANIMAL, )
 
 }
 

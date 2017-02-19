@@ -27,6 +27,7 @@
     "react-native-maps": "^0.13.0",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
+    "redux-actions": "^1.2.1",
     "redux-promise": "^0.5.3",
     "touchable-elastic": "0.0.1"
   },

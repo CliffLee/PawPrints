@@ -21,7 +21,7 @@ const defaultFormState = {
 };
 
 const defaultMapState = {
-  animalsWithinRegion: []
+  lostPets: []
 };
 
 const defaultUserState = {

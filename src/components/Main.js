@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import ReduxPromise from 'redux-promise';
+import promiseMiddleware from 'redux-promise';
 
 const FBSDK = require('react-native-fbsdk');
 const {
@@ -34,7 +34,7 @@ const ROUTES = {
   PetDetail
 };
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
 
 const initialRouteStack = [
   { title: 'Login' },
