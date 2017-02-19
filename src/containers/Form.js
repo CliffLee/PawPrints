@@ -21,11 +21,12 @@ const {
   AccessToken
 } = FBSDK;
 
-import MapView from 'react-native-maps';
 import TouchableElastic from 'touchable-elastic';
 import {
   setFormState
 } from '../actions';
+
+import Map from './Map';
 
 class Form extends React.Component {
   constructor(props) {
@@ -103,10 +104,7 @@ class Form extends React.Component {
             visible={generalLocationMapModalVisible}
             >
             <View style={{ flex: 1, borderWidth: 10 }}>
-              <MapView
-                style={{ flex: 1 }}
-                // initialRegion={}
-                />
+              <Map select={true}/>
             </View>
           </Modal>
 
@@ -241,7 +239,7 @@ function mapStateToProps({ form }) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    setState: setFormState
+    setState: setFormState,
   }, dispatch);
 }
 
