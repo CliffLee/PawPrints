@@ -56,7 +56,7 @@ class Menu extends Component{
 	}
 
 	lost(){
-		this.props.navigator.push({title: 'Map'});
+		this.props.navigator.push({title: 'Form'});
 	}
 
 	backToLogin(){
