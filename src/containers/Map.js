@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  Image
 } from 'react-native';
 
 import TouchableElastic from 'touchable-elastic';
@@ -51,14 +52,29 @@ class Map extends React.Component {
           style={{ flex: 1 }}
           onRegionChangeComplete={this.onRegionChange.bind(this)}
           initialRegion={this.getInitialRegion()}
-          showsUserLocation={true}
-        />
-        <TouchableElastic
+          showsUserLocation={!this.props.select}/>
+
+        {!this.props.select && <TouchableElastic
           style={styles.petFoundButton}
           onPress={() => this.props.navigator.push({ title: 'Capture' })}
           >
-          <Text style={styles.petFoundText}>Pet Found</Text>
-        </TouchableElastic>
+           <Text style={styles.petFoundText}>
+            <Image style={styles.logo} source={require('../resources/images/logo-white-img.png')}/>
+            FOUND
+          </Text>
+        </TouchableElastic>}
+        {
+          this.props.select && 
+          <View style={styles.locationBox}>
+            <Image style={styles.icon} source={require('../resources/images/icons/loc-o.png')}/>
+            <Text style={styles.locationText}>Longitude:{this.state.region.longitude}</Text>
+            <Text style={styles.locationText}>Latitude: {this.state.region.latitude}</Text>
+            <TouchableElastic
+              style={styles.petFoundButton}>
+             <Text style={styles.petFoundText}>HERE</Text>
+            </TouchableElastic>
+          </View>
+        }
       </View>
     );
   }
@@ -75,14 +91,34 @@ class Map extends React.Component {
 const styles = StyleSheet.create({
   petFoundButton: {
     position: 'absolute',
-    width: 170,
-    height: 60,
-    left: width / 2 - 85,
+    width: 200,
+    height: 40,
+    left: width / 2 - 102,
     bottom: 30,
-    backgroundColor: 'white',
+    backgroundColor: '#eb9c22',
+    borderRadius: 100
   },
   petFoundText: {
-    fontSize: 26
+    fontSize: 20,
+    color: '#fff',
+    marginTop: -5
+  },
+  logo: {
+    width: 30,
+    height: 25,
+    marginRight: 10,
+    marginTop: 5
+  },
+  /*styles for form*/
+  locationBox: {
+    height: 180,
+    alignItems: 'center',
+    paddingTop: 20
+  },
+  icon: {
+    height: 25,
+    width: 20,
+    marginBottom: 10
   }
 });
 
