@@ -31,11 +31,16 @@ const store = createStore(
   rootReducer
 );
 
+const initialRouteStack = [
+  { title: 'Login' },
+  { title: 'Map' }
+];
+
 export default class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      routeTitleAfterLoading: null
+      initialRouteIndex: null
     };
   }
 
@@ -43,30 +48,30 @@ export default class Main extends React.Component {
     AccessToken.getCurrentAccessToken()
       .then(data => {
         if (data) {
-          this.setState({ routeTitleAfterLoading: 'Map' });
+          this.setState({ initialRouteIndex: 1 });
           AccessToken.refreshCurrentAccessTokenAsync();
         } else {
-          this.setState({ routeTitleAfterLoading: 'Login' });
+          this.setState({ initialRouteIndex: 0 });
         }
       })
   }
 
   render() {
-    if (!this.state.routeTitleAfterLoading) {
+    if (this.state.initialRouteIndex === null) {
       return null;
     }
 
     return (
       <Provider store={store}>
         <Navigator
-          initialRoute={{ title: 'Loading' }}
+          initialRoute={initialRouteStack[this.state.initialRouteIndex]}
           configureScene={(route, navigator) => Navigator.SceneConfigs.FadeAndroid}
+          initialRouteStack={initialRouteStack}
           renderScene={(route, navigator) => {
             let Component = ROUTES[route.title];
             return (
               <Component
                 navigator={navigator}
-                routeTitleAfterLoading={this.state.routeTitleAfterLoading}
               />
             );
           }}

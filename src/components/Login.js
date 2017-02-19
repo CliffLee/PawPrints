@@ -42,12 +42,8 @@ export default class Main extends React.Component {
 	              } else if (result.isCancelled) {
 	                alert("login is cancelled.");
 	              } else {
-	                AccessToken.getCurrentAccessToken().then(
-	                  /*(data) => {
-	                    alert(data.accessToken.toString())
-	                  }*/
-	                  this.login()
-	                )
+	                AccessToken.getCurrentAccessToken()
+                    .then(() => this.props.navigator.jumpForward())
 	              }
 	            }
 	          }
@@ -68,11 +64,6 @@ export default class Main extends React.Component {
 			easing: Easing.ease
 		}).start();
 	}
-
-  login() {
-    // auth stuff
-    this.props.navigator.push({ title: 'Map' });
-  }
 }
 
 const styles = StyleSheet.create({

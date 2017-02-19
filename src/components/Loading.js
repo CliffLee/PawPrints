@@ -12,30 +12,6 @@ import TouchableElastic from 'touchable-elastic';
 
 export default class Main extends Component{
 
-	constructor(props){
-		super(props);
-		this.bounceValue = new Animated.Value(0);
-		this.fadeValue = new Animated.Value(1);
-	}
-
-	componentDidMount(){
-		this.bounce();
-		setTimeout(() => {
-			this.start();
-		}, 2000);
-	}
-
-	bounce(){
-		this.bounceValue.setValue(1.5);
-	    Animated.spring(                          // Base: spring, decay, timing
-	    	this.bounceValue,
-	    	{
-		        toValue: 1,
-		        friction: 3,
-	    	}
-	    ).start();
-	}
-
 	render(){
 		return (
 			<View style={styles.container}>
