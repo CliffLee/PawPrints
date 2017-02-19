@@ -12,7 +12,7 @@ function getModel() {
 }
 
 /*
- * POST /api/lost/
+ * POST /api/lost/add/
  *
  * Post a lost animal {
  *  id,

@@ -1,18 +1,24 @@
 import express from 'express';
+import bodyParser from 'body-parser';
 import nodemailer from 'nodemailer';
 import search from '../../util/places';
 
 const router = express.Router();
 
+router.use(bodyParser.urlencoded({ extended:false }));
+
 /*
  * GET /api/found/
  *
- * returns a list of max 10 nearby lost pets
+ * test function
  */
 router.get('/', (req,res,next) => {
   res.send('hello');
 });
 
+/*
+ * POST /api/found/email/
+ */
 router.post('/email', (req,res) => {
   let smtpConfig = {
     host: 'smtp.gmail.com',
