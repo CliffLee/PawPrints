@@ -5,7 +5,7 @@ const ds = Datastore({
   projectId: config.get('GCLOUD_PROJECT')
 });
 
-const kind = 'Pet';
+const kind = 'Lost Pet';
 
 /*
  * Datastore format:
@@ -39,7 +39,7 @@ function toDataStore(obj, nonIndexed) {
 }
 
 function create(data) {
-  const taskKey = ds.key('Lost Pet');
+  const taskKey = ds.key(kind);
   const entity = {
     key: taskKey,
     data: [
@@ -101,33 +101,45 @@ function read(id, cb) {
   });
 }
 
-function update(id,data,cb) {
-  let key;
-  if (id) {
-    key = ds.key([kind, parseInt(id,10)]);
-  } else {
-    key = ds.key(kind);
-  }
+function update(petId, updatedPet) {
+  const transaction = ds.transaction();
+  const petKey = ds.key([
+    'Lost Pet',
+    petId
+  ]);
 
-  const entity = {
-    key: key,
-    data: toDataStore(data, ['description'])
-  };
-
-  ds.save(
-    entity,
-    (err) => {
-      data.id = entity.key.id;
-      cb(err, err ? null : data);
-    }
-  );
+  return transaction.run()
+    .then(() => transaction.get(petKey))
+    .then((results) => {
+      const pet = results[0];
+      for (var field in updatedPet) {
+        pet[field] = updatedPet[field];
+      }
+      transaction.save({
+        key: petKey,
+        data: pet
+      });
+      return transaction.commit();
+    })
+    .then(() => {
+      console.log(`Pet ${petId} updated successfully`);
+    })
+    .catch(() => transaction.rollback());
 }
 
-function list(limit, cb) {
+function list(limit) {
   const q = ds.createQuery(kind)
     .limit(limit);
 
-    ds.runQuery(q, cb); 
+  return new Promise((res,rej) => {
+    ds.runQuery(q, (err, entities, info) => {
+      if(!!err) {
+        rej(err)
+      } else {
+        res(entities) 
+      }
+    })
+  })
 }
 
 module.exports = {
