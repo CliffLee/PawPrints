@@ -9,9 +9,24 @@ import {
   StyleSheet
 } from 'react-native';
 
+import { width } from '../globalStyles'
+
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 let lostPetsData = [
+  {
+    uuid: '',
+    imageUrl: 'https://facebook.github.io/react/img/logo_og.png',
+    location: {
+      latitude: 0,
+      longitude: 0
+    },
+    time: new Date(),
+    breed: 'idk',
+    name: 'Bernie',
+    weight: '14',
+    sex: 'Male'
+  },
   {
     uuid: '',
     imageUrl: 'https://facebook.github.io/react/img/logo_og.png',
@@ -33,8 +48,8 @@ class LostPetsList extends React.Component {
       <View style={{ flex: 1 }}>
         <ListView
           dataSource={ds.cloneWithRows(lostPetsData)}
-          renderRow={(data, i) => this.renderRow(data, i)}
-          renderSeparator={() => (<View style={styles.separator} />)}
+          renderRow={(data, s, r) => this.renderRow(data, r)}
+          renderSeparator={(i, r) => (<View key={r} style={styles.separator} />)}
           showsVerticalScrollIndicator={true}
         />
       </View>
@@ -48,14 +63,16 @@ class LostPetsList extends React.Component {
         style={styles.row}
         key={key}
         >
-        <View style={{ flex: 1 }}>
+        <View style={[styles.centerY]}>
           <Image
             style={styles.image}
             source={{ uri: data.imageUrl }}
           />
         </View>
-        <View style={{ flex: 5 }}>
-          <Text>{data.name}</Text>
+        <View style={[{ marginLeft: 10 }, styles.centerY]}>
+          <Text style={styles.infoText}>{`Name: ${data.name}`}</Text>
+          <Text style={styles.infoText}>{`breed: ${data.breed}`}</Text>
+          <Text style={styles.infoText}>{`weight: ${data.weight}`}</Text>
         </View>
       </View>
     );
@@ -71,15 +88,22 @@ function mapStateToProps({ lostPets }) {
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
-    padding: 5
+    padding: 10
   },
   separator: {
-    backgroundColor: 'gray'
+    backgroundColor: 'gray',
+    height: 1
   },
   image: {
-    height: 70,
-    width: 70,
-    borderRadius: 35
+    height: 90,
+    width: 90,
+    borderRadius: 45
+  },
+  infoText: {
+    fontSize: 25
+  },
+  centerY: {
+    justifyContent: 'center'
   }
 });
 

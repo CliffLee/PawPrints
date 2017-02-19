@@ -24,7 +24,7 @@ class Menu extends Component{
 		return (
 			<Image source={require('../resources/images/cat.png')} style={styles.container}>
 				<Text style={styles.text}>I&apos;ve</Text>
-				<View style={{display: 'flex', flexDirection: 'row', margin: 20, justifyContent: 'center', alignItems: 'center'}}>
+				<View style={{ flexDirection: 'row', margin: 20, justifyContent: 'center', alignItems: 'center'}}>
 					<TouchableElastic elevation={5} style={styles.buttonLost} onPress={() => this.lost()}>
 						<Image style={styles.image} source={require('../resources/images/logo-lost.png')}/>
 					</TouchableElastic>
@@ -56,7 +56,7 @@ class Menu extends Component{
 	}
 
 	lost(){
-		this.props.navigator.push({title: 'Map'});
+		this.props.navigator.push({title: 'Form'});
 	}
 
 	backToLogin(){

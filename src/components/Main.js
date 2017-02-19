@@ -67,7 +67,7 @@ export default class Main extends React.Component {
       <Provider store={store}>
         <Navigator
           initialRoute={initialRouteStack[this.state.initialRouteIndex]}
-          configureScene={(route, navigator) => Navigator.SceneConfigs.FadeAndroid}
+          configureScene={this.configureScene}
           initialRouteStack={initialRouteStack}
           renderScene={(route, navigator) => {
             let Component = ROUTES[route.title];
@@ -80,5 +80,13 @@ export default class Main extends React.Component {
         />
       </Provider>
     );
+  }
+
+  configureScene(route) {
+    if (!['Menu', 'Form', 'Map'].includes(route.title)) {
+      return Navigator.SceneConfigs.FadeAndroid
+    } else {
+      return Navigator.SceneConfigs.PushFromRight
+    }
   }
 }
