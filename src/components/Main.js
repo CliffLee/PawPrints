@@ -19,6 +19,8 @@ import Map from '../containers/Map';
 import Form from '../containers/Form';
 import Capture from '../containers/Capture';
 import LostPetsList from '../containers/LostPetsList';
+import PetMatcher from '../containers/PetMatcher';
+import PetDetail from '../containers/PetDetail';
 
 const ROUTES = {
   Login,
@@ -26,7 +28,9 @@ const ROUTES = {
   Map,
   Form,
   Capture,
-  LostPetsList
+  LostPetsList,
+  PetMatcher,
+  PetDetail
 };
 
 const store = createStore(
@@ -74,6 +78,7 @@ export default class Main extends React.Component {
             return (
               <Component
                 navigator={navigator}
+                data={route.data}
               />
             );
           }}

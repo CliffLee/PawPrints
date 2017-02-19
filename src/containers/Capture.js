@@ -101,7 +101,7 @@ class Capture extends React.Component {
 
   confirm() {
     if (this.props.capture.imagePath) {
-      this.props.navigator.push({ title: 'LostPetsList' });
+      this.props.navigator.push({ title: 'PetMatcher' });
     }
   }
 }
