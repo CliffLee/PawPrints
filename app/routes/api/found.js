@@ -42,7 +42,7 @@ router.post('/email', (req,res) => {
  */
 router.post('/shelters', (req,res) => {
   const locations = search(req.body.lat, req.body.lng);
-  res.json(locations);
+  res.json(locations.results);
 });
 
 export default router;
