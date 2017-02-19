@@ -1,5 +1,6 @@
 import express from 'express';
 import nodemailer from 'nodemailer';
+import search from '../../util/places';
 
 const router = express.Router();
 
@@ -23,6 +24,19 @@ router.post('/email', (req,res) => {
     }
   };
   let transporter = nodemailer.createTransport(smtpConfig)
+});
+
+/*
+ * POST - /api/found/shelters
+ *
+ * req.body = {
+ *  lat,
+ *  lng
+ * }
+ */
+router.post('/shelters', (req,res) => {
+  const locations = search(req.body.lat, req.body.lng);
+  res.json(locations);
 });
 
 export default router;
