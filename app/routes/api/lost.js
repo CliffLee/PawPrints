@@ -40,7 +40,8 @@ router.post(
 });
 
 router.get('/nearby', (req, res, next) => {
-  res.json(getModel().list(6));
+  getModel().list(6)
+    .then((data) => res.json(data))
 });
 
 export default router;

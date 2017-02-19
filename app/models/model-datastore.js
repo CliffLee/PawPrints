@@ -131,7 +131,15 @@ function list(limit) {
   const q = ds.createQuery(kind)
     .limit(limit);
 
-  return ds.runQuery(q);
+  return new Promise((res,rej) => {
+    ds.runQuery(q, (err, entities, info) => {
+      if(!!err) {
+        rej(err)
+      } else {
+        res(entities) 
+      }
+    })
+  }
 }
 
 module.exports = {
