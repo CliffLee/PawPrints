@@ -40,13 +40,12 @@ router.post(
 });
 
 router.get('/nearby', (req, res, next) => {
-  getModel().list(2, (err,entities) => {
+  getModel().list(6, (err,entities) => {
     if (err) {
       next(err);
       return;
     }
-    //console.log(JSON.parse(entities));
-    res.json(entities);
+    console.log(JSON.parse(entities));
   });
 });
 
