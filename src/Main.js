@@ -18,13 +18,15 @@ import Login from './components/Login';
 import Menu from './components/Menu';
 import Map from './components/Map';
 import Form from './components/Form';
+import Capture from './components/Capture';
 
 const ROUTES = {
   Loading,
   Login,
   Menu,
   Map,
-  Form
+  Form,
+  Capture
 };
 
 const store = createStore(

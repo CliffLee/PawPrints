@@ -41,7 +41,6 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>NSAppTransportSecurity</key>
-	<!--See http://ste.vn/2015/06/10/configuring-app-transport-security-ios-9-osx-10-11/ -->
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
@@ -52,31 +51,29 @@
 			</dict>
 		</dict>
 	</dict>
-  
-  
-  <key>CFBundleURLTypes</key>
-  <array>
-    <dict>
-      <key>CFBundleURLSchemes</key>
-      <array>
-        <string>fb197147867351522</string>
-      </array>
-    </dict>
-  </array>
-  <key>FacebookAppID</key>
-  <string>197147867351522</string>
-  <key>FacebookDisplayName</key>
-  <string>PawPrints</string>
-  <key>LSApplicationQueriesSchemes</key>
-  <array>
-    <string>fbapi</string>
-    <string>fb-messenger-api</string>
-    <string>fbauth2</string>
-    <string>fbshareextension</string>
-  </array>
-  <key>NSPhotoLibraryUsageDescription</key>
-  <string>Take a picture of the dog.</string>
-  
-  
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb197147867351522</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>197147867351522</string>
+	<key>FacebookDisplayName</key>
+	<string>PawPrints</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Take a picture of the dog.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Used to take photos</string>
 </dict>
 </plist>
