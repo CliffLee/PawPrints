@@ -44,40 +44,28 @@ function create(data) {
     key: taskKey,
     data: [
       {
-        name: 'user',
-        value: data.user
-      },
-      {
-        name: 'title',
-        value: data.title
-      },
-      {
         name: 'sex',
         value: data.sex
       },
       {
-        name: 'lost_datetime',
-        value: data.lost_datetime
+        name: 'time',
+        value: data['time']
       },
       {
-        name: 'pet_name',
-        value: data.pet_name
+        name: 'name',
+        value: data['name']
       },
       {
-        name: 'pet_breed',
-        value: data.pet_breed
+        name: 'breed',
+        value: data.breed
       },
       {
-        name: 'pet_weight',
-        value: data.pet_weight
+        name: 'weight',
+        value: data.weight
       },
       {
-        name: 'pet_height',
-        value: data.pet_height
-      },
-      {
-        name: 'pet_species',
-        value: data.pet_species
+        name: 'species',
+        value: data.species
       },
       {
         name: 'latlong',
