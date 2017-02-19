@@ -20,7 +20,6 @@ import TouchableElastic from 'touchable-elastic';
 
 export default class Main extends React.Component {
 
-
 	constructor(props){
 		super(props);
 
@@ -30,7 +29,6 @@ export default class Main extends React.Component {
 	componentDidMount(){
 		this.animateIn();
 	}
-
 
 	animateIn(){
 		Animated.timing(this.marginValue, 
@@ -59,9 +57,10 @@ export default class Main extends React.Component {
 	                alert("login is cancelled.");
 	              } else {
 	                AccessToken.getCurrentAccessToken().then(
-	                  (data) => {
+	                  /*(data) => {
 	                    alert(data.accessToken.toString())
-	                  }
+	                  }*/
+	                  this.login()
 	                )
 	              }
 	            }

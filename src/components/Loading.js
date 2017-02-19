@@ -33,18 +33,7 @@ export default class Main extends Component{
 		        toValue: 1, 
 		        friction: 3, 
 	    	}
-	    ).start(() => this.fade());
-	}
-
-	fade(){
-		/*Animated.timing(
-			this.fadeValue,
-			{
-				toValue: 0,
-				duration: 300,
-				easing: Easing.ease
-			}
-		).start();*/
+	    ).start();
 	}
 
 	render(){
@@ -58,12 +47,6 @@ export default class Main extends Component{
 				        opacity: this.fadeValue
 					}]}
 					source={require('../resources/images/logo-large.png')}/>
-				{/*<TouchableElastic
-		          style={styles.button}
-		          onPress={() => this.login()}
-		          >
-		          <Text style={styles.buttonText}>LOGIN</Text>
-		        </TouchableElastic>*/}
 	      	</View>
 		);
 	}
@@ -71,11 +54,6 @@ export default class Main extends Component{
 	start(){
 		this.props.navigator.push({ title: 'Login' });
 	}
-
-	login(){
-		this.props.navigator.push({ title: 'Map' });
-	}
-
 }
 
 const styles = StyleSheet.create({
