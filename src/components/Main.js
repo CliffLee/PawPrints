@@ -5,16 +5,18 @@ import {
 } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+import promiseMiddleware from 'redux-promise';
+
 const FBSDK = require('react-native-fbsdk');
 const {
   LoginButton,
   AccessToken
 } = FBSDK;
 
-
 import rootReducer from '../reducers';
 import Login from './Login';
 import Menu from './Menu';
+import Email from './Email';
 import Map from '../containers/Map';
 import Form from '../containers/Form';
 import Capture from '../containers/Capture';
@@ -30,12 +32,11 @@ const ROUTES = {
   Capture,
   LostPetsList,
   PetMatcher,
-  PetDetail
+  PetDetail,
+  Email
 };
 
-const store = createStore(
-  rootReducer
-);
+const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
 
 const initialRouteStack = [
   { title: 'Login' },
@@ -68,7 +69,7 @@ export default class Main extends React.Component {
     }
 
     return (
-      <Provider store={store}>
+      <Provider store={createStoreWithMiddleware(rootReducer)}>
         <Navigator
           initialRoute={initialRouteStack[this.state.initialRouteIndex]}
           configureScene={this.configureScene}
@@ -78,8 +79,7 @@ export default class Main extends React.Component {
             return (
               <Component
                 navigator={navigator}
-                data={route.data}
-              />
+                data={route.data}/>
             );
           }}
         />

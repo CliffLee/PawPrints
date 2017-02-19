@@ -4,17 +4,23 @@ import {
   View,
   Image,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  StyleSheet
 } from 'react-native';
 
 import { height, width } from '../globalStyles'
 
 class PetDetail extends React.Component {
+
+  sendEmail(){
+    this.props.navigator.push({ title: 'Email' });
+  }
+
   render() {
     let { data } = this.props;
     return (
       <View style={[styles.container, {paddingTop: 40, backgroundColor: '#eee'}]}>
-        <Text style={{ fontSize: 30, alignSelf: 'center', fontWeight: 'bold', paddingBottom: 10 }}>Potential Match!</Text>
+        <Text style={{ fontSize: 30, alignSelf: 'center', fontWeight: 'bold', paddingBottom: 20 }}>Potential Match!</Text>
         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
           <Image
             style={{width: width * 0.4, height: width * 0.4}}
@@ -25,25 +31,26 @@ class PetDetail extends React.Component {
         </View>
         <View style={styles.container}>
           <View style={styles.dataField}>
-            <View style={styles.button}><Text style={styles.buttonText}>Name</Text></View>
-            <Text style={styles.dataValue}>fdsafdsafds</Text>
+            <View style={styles.button}><Text style={styles.buttonText}>NAME</Text></View>
+            <Text style={styles.dataValue}>Scoobs</Text>
           </View>
            <View style={styles.dataField}>
-            <View style={styles.button}><Text style={styles.buttonText}>Breed</Text></View>
-            <Text style={styles.dataValue}>{data.breed}</Text>
+            <View style={styles.button}><Text style={styles.buttonText}>BREED</Text></View>
+            <Text style={styles.dataValue}>Pitbull Mix</Text>
           </View>
            <View style={styles.dataField}>
-            <View style={styles.button}><Text style={styles.buttonText}>Gender</Text></View>
-            <Text style={styles.dataValue}>{data.sex}</Text>
+            <View style={styles.button}><Text style={styles.buttonText}>GENDER</Text></View>
+            <Text style={styles.dataValue}>Male</Text>
           </View>
            <View style={styles.dataField}>
-            <View style={styles.button}><Text style={styles.buttonText}>Species</Text></View>
-            <Text style={styles.dataValue}>{data.species}</Text>
+            <View style={styles.button}><Text style={styles.buttonText}>SPECIES</Text></View>
+            <Text style={styles.dataValue}>Dog</Text>
           </View>
            <View style={styles.dataField}>
-            <View style={styles.button}><Text style={styles.buttonText}>Weight</Text></View>
-            <Text >{data.weight}</Text>
+            <View style={styles.button}><Text style={styles.buttonText}>WEIGHT</Text></View>
+            <Text style={styles.dataValue}>16.4kg</Text>
           </View>
+
            {/*<View style={styles.dataField}>
             <View style={styles.button}><Text style={styles.buttonText}>Last Seen</Text></View>
             <Text></Text>
@@ -58,58 +65,52 @@ class PetDetail extends React.Component {
           </View>*/}
         </View>
 
-        <TouchableOpacity style={styles.found}>
-          <Text style={styles.foundText}>{`I FOUND ${data.name}!!!`}</Text>
+        <TouchableOpacity style={styles.found} onPress={() => this.sendEmail()}>
+          <Text style={styles.foundText}>{`I FOUND SCOOBS!!!`}</Text>
         </TouchableOpacity>
       </View>
     );
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
 
   container: {
-     flex: 1,
-     color: '#eee',
-     alignItems: 'center',
-     paddingTop: 10,
-     paddingBottom: 50
-  },
-
-  button: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#eb9c22',
-    width: 80,
-    borderRadius: 10,
-    alignItems: 'flex-start',
-    marginTop: 6,
-    marginBottom: -8,
-    marginLeft: 6
-  },
-
-  buttonText: {
-    fontSize: 12,
-    fontWeight: 'bold',
-    color: '#fff',
-    paddingLeft: 10,
+    alignItems: 'center',
+    paddingBottom: 60,
+    paddingTop: 40
   },
 
   dataField: {
-    flex: 1,
+    width: width* 0.8,
     backgroundColor: '#fff',
-    width: width * 0.8,
+    marginBottom: 10,
     borderRadius: 10,
-    borderCollapse: 'separate',
-    justifyContent: 'center',
-    marginBottom: 5,
-    marginTop: 5,
-    alignItems: 'flex-start',
-    overflow: 'hidden',
+    flex: 1,
+    flexDirection: 'row',
+    overflow: 'hidden'
   },
 
   dataValue: {
-    marginLeft: 100,
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginLeft: 20
+  },
+
+  button: {
+    backgroundColor: '#eb9c22',
+    borderRadius: 10,
+    width: 100,
+  },
+
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 10
   },
 
   found: {
@@ -127,7 +128,7 @@ const styles = {
     fontWeight: 'bold',
   }
 
-}
+});
 
 
 function mapStateToProps({ capture, lostPets }) {

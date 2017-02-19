@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
@@ -53,6 +54,7 @@ class Map extends React.Component {
         source={require('../resources/images/icons/paw.png')}/>
     ) : null;
 
+ console.log('rendering')
     return (
       <View style={{ flex: 1, justifyContent: 'center', backgroundColor: '#fff' }}>
         {centerMarker}
@@ -60,7 +62,19 @@ class Map extends React.Component {
           style={{ flex: 1 }}
           onRegionChangeComplete={this.onRegionChange.bind(this)}
           initialRegion={this.getInitialRegion()}
-          showsUserLocation={!this.props.select}/>
+          showsUserLocation={!this.props.select}
+          >
+          {this.props.map.lostPets.map((data, i) => {
+            console.log('DATA', data.latlong)
+            return (
+              <MapView.Marker
+                key={i}
+                coordinate={data.latlong}
+                image={require('../resources/images/icons/paw-o.png')}>
+              </MapView.Marker>
+            );
+          })}
+        </MapView>
 
         {!this.props.select && <TouchableElastic
           style={styles.petFoundButton}
@@ -89,13 +103,21 @@ class Map extends React.Component {
     );
   }
 
-  componentWillMount() {
+  componentDidMount() {
     getUserLocation(location => {
       console.log('LOCATION', location)
       this.props.setUserState({ location });
       this.setState({region: location})
     });
-    this.props.getLostListing();
+
+    const url = 'https://pawprints-159112.appspot-preview.com/api/lost/nearby';
+    axios.get(url)
+      .then(({ data }) => {
+        console.log('DATA', data)
+        this.props.setState({ lostPets: data });
+      })
+      .catch(err => console.log('err:'. err))
+
   }
 
   onHere() {

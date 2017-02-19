@@ -17,7 +17,7 @@ import {
 import { width } from '../globalStyles'
 
 let lostPetsData = [
-  { imageUrl: 'https://www.dogstrust.org.uk/dogimages/1164893_joy_20170218112127_joy_253.jpg' },
+  { imageUrl: 'https://s3-eu-west-1.amazonaws.com/bowwowtimes-new/wp-content/uploads/2015/05/93527204d60e24b6975d952aaa2dd041.jpg' },
   { imageUrl: 'https://s-media-cache-ak0.pinimg.com/736x/a9/a3/46/a9a34606f68f5f86aa94833ad482e4c9.jpg' },
   { imageUrl: 'https://i.ytimg.com/vi/opKg3fyqWt4/hqdefault.jpg' },
   { imageUrl: 'https://www.dogstrust.org.uk/dogimages/1164893_joy_20170218112127_joy_253.jpg' },
