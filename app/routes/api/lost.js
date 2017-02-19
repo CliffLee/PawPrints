@@ -24,14 +24,30 @@ function getModel() {
  *  timestamp
  * }
  */
-router.post('/add', (req,res,next) => {
-  const data = req.body;
-  getModel().create(data);
-  res.json({"success": true});
+router.post(
+  '/add',
+  images.multer.single('image'),
+  images.sendUploadToGCS,
+  (req,res) => {
+    let data = req.body;
+
+    if (req.file && req.file.cloudStoragePublicUrl) {
+      data.imageUrl = req.file.cloudStoragePublicUrl
+    }
+
+    getModel().create(data)
+      .then(res.json({"success": true}));
 });
 
-router.get('/:id', (req, res, next) => {
-  // TODO
+router.get('/nearby', (req, res, next) => {
+  getModel().list(2, (err,entities) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    //console.log(JSON.parse(entities));
+    res.json(entities);
+  });
 });
 
 export default router;

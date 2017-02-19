@@ -8,7 +8,7 @@ const router = express.Router();
  * returns a list of max 10 nearby lost pets
  */
 router.get('/', (req,res,next) => {
-  
+  res.send('hello');
 });
 
 export default router;

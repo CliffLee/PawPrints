@@ -4,7 +4,7 @@ import config from '../config/config.js';
 const ds = Datastore({
   projectId: config.get('GCLOUD_PROJECT')
 });
-console.log(ds);
+
 const kind = 'Pet';
 
 /*
@@ -82,8 +82,8 @@ function create(data) {
       {
         name: 'latlong',
         value: {
-          "latitude": 24.821443,
-          "longitude": -112.021519
+          "latitude": data.latlong.latitude,
+          "longitude": data.latlong.longitude
         }
       }
     ]
@@ -135,10 +135,17 @@ function update(id,data,cb) {
   );
 }
 
+function list(limit, cb) {
+  const q = ds.createQuery(kind)
+    .limit(limit);
+
+    ds.runQuery(q, cb); 
+}
+
 module.exports = {
   create,
   read,
-  update
+  update,
 //  delete: _delete,
-//  list
+  list
 };
