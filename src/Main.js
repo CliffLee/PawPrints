@@ -5,6 +5,12 @@ import {
 } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+const FBSDK = require('react-native-fbsdk');
+const {
+  LoginButton,
+  AccessToken
+} = FBSDK;
+
 
 import rootReducer from './reducers';
 import Loading from './components/Loading';
@@ -24,7 +30,30 @@ const store = createStore(
 );
 
 export default class Main extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      routeTitleAfterLoading: null
+    };
+  }
+
+  componentWillMount() {
+    AccessToken.getCurrentAccessToken()
+      .then(data => {
+        if (data) {
+          this.setState({ routeTitleAfterLoading: 'Map' });
+          AccessToken.refreshCurrentAccessTokenAsync();
+        } else {
+          this.setState({ routeTitleAfterLoading: 'Login' });
+        }
+      })
+  }
+
   render() {
+    if (!this.state.routeTitleAfterLoading) {
+      return null;
+    }
+
     return (
       <Provider store={store}>
         <Navigator
@@ -32,7 +61,12 @@ export default class Main extends React.Component {
           configureScene={(route, navigator) => Navigator.SceneConfigs.FadeAndroid}
           renderScene={(route, navigator) => {
             let Component = ROUTES[route.title];
-            return (<Component navigator={navigator} />);
+            return (
+              <Component
+                navigator={navigator}
+                routeTitleAfterLoading={this.state.routeTitleAfterLoading}
+              />
+            );
           }}
         />
       </Provider>

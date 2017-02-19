@@ -28,10 +28,10 @@ export default class Main extends Component{
 	bounce(){
 		this.bounceValue.setValue(1.5);
 	    Animated.spring(                          // Base: spring, decay, timing
-	    	this.bounceValue,  
+	    	this.bounceValue,
 	    	{
-		        toValue: 1, 
-		        friction: 3, 
+		        toValue: 1,
+		        friction: 3,
 	    	}
 	    ).start();
 	}
@@ -41,7 +41,7 @@ export default class Main extends Component{
 			<View style={styles.container}>
 				<Animated.Image
 					style={[styles.image, {
-						transform: [                        
+						transform: [
 				            {scale: this.bounceValue}
 				        ],
 				        opacity: this.fadeValue
@@ -52,7 +52,7 @@ export default class Main extends Component{
 	}
 
 	start(){
-		this.props.navigator.push({ title: 'Login' });
+		this.props.navigator.push({ title: this.props.routeTitleAfterLoading });
 	}
 }
 
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
 		borderWidth: 0,
 		borderColor: '#eb9c22',
 		padding: 10,
-		borderRadius: 5, 
+		borderRadius: 5,
 		backgroundColor: '#555655',
 		width: 180
 	},

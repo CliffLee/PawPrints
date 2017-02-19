@@ -17,7 +17,6 @@ import {
 
 import TouchableElastic from 'touchable-elastic';
 
-
 export default class Main extends React.Component {
 
 	constructor(props){
@@ -26,26 +25,13 @@ export default class Main extends React.Component {
 		this.marginValue = new Animated.Value(-60);
 	}
 
-	componentDidMount(){
-		this.animateIn();
-	}
-
-	animateIn(){
-		Animated.timing(this.marginValue, 
-			{
-				toValue: 0,
-				duration: 300,
-				easing: Easing.ease
-			}).start();
-	}
-
 	render() {
-    	return (
-      	<Image source={require('../resources/images/dog.png')} style={styles.container}>
+  	return (
+    	<Image source={require('../resources/images/dog.png')} style={styles.container}>
       	<Animated.Image
 				style={[styles.image, {marginTop: this.marginValue}]}
 				source={require('../resources/images/logo-white.png')}/>
-      	<TouchableElastic>        	
+      	<TouchableElastic>
 	      	<LoginButton
 	      	  style={styles.button}
 	          publishPermissions={["publish_actions"]}
@@ -70,6 +56,18 @@ export default class Main extends React.Component {
       </Image>
     );
   }
+
+  componentDidMount(){
+		this.animateIn();
+	}
+
+	animateIn(){
+		Animated.timing(this.marginValue, {
+			toValue: 0,
+			duration: 300,
+			easing: Easing.ease
+		}).start();
+	}
 
   login() {
     // auth stuff

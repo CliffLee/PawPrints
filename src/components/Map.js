@@ -18,7 +18,7 @@ class Map extends React.Component {
     this.state = {region: null};
   }
 
-  getInitialState(){
+  getInitialState(){ // throws error; reserved function name
     var initLat = this.state.region.latitude,
         initLong = this.state.region.longitude;
 
@@ -47,7 +47,9 @@ class Map extends React.Component {
         <MapView
           style={{ flex: 1 }}
           onRegionChangeComplete={this.onRegionChange.bind(this)}
-          initialRegion={this.getInitialState()}/>
+          initialRegion={this.getInitialState()}
+          showsUserLocation={true}
+        />
       </View>
     );
   }
