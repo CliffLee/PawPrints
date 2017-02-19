@@ -3,13 +3,19 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "start": "node dist/bin/www",
     "test": "jest",
     "ios": "react-native run-ios",
-    "android": "react-native run-android"
+    "android": "react-native run-android",
+    "build": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
+    "@google-cloud/datastore": "^0.7.0",
+    "@google-cloud/storage": "^0.7.0",
+    "express": "^4.0.0",
     "moment": "^2.17.1",
+    "multer": "^1.3.0",
+    "nconf": "^0.8.4",
     "react": "15.4.2",
     "react-native": "^0.41.2",
     "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",

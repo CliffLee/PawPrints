@@ -3,7 +3,7 @@
 import cluster from 'cluster';
 import master from '../start/master';
 import worker from '../start/worker';
-
+/*
 if (cluster.isMaster) {
 	master(cluster, {
 		timeoutLength: 5000,
@@ -12,3 +12,6 @@ if (cluster.isMaster) {
 } else {
 	worker();
 }
+*/
+
+worker();

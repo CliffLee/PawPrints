@@ -18,13 +18,19 @@ import Menu from './Menu';
 import Map from '../containers/Map';
 import Form from '../containers/Form';
 import Capture from '../containers/Capture';
+import LostPetsList from '../containers/LostPetsList';
+import PetMatcher from '../containers/PetMatcher';
+import PetDetail from '../components/PetDetail';
 
 const ROUTES = {
   Login,
   Menu,
   Map,
   Form,
-  Capture
+  Capture,
+  LostPetsList,
+  PetMatcher,
+  PetDetail
 };
 
 const store = createStore(
@@ -65,7 +71,7 @@ export default class Main extends React.Component {
       <Provider store={store}>
         <Navigator
           initialRoute={initialRouteStack[this.state.initialRouteIndex]}
-          configureScene={(route, navigator) => Navigator.SceneConfigs.FadeAndroid}
+          configureScene={this.configureScene}
           initialRouteStack={initialRouteStack}
           renderScene={(route, navigator) => {
             let Component = ROUTES[route.title];
@@ -78,5 +84,13 @@ export default class Main extends React.Component {
         />
       </Provider>
     );
+  }
+
+  configureScene(route) {
+    if (!['Menu', 'Form', 'Map'].includes(route.title)) {
+      return Navigator.SceneConfigs.FadeAndroid
+    } else {
+      return Navigator.SceneConfigs.PushFromRight
+    }
   }
 }
