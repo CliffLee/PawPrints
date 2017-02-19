@@ -1,4 +1,5 @@
 import express from 'express';
+import nodemailer from 'nodemailer';
 
 const router = express.Router();
 
@@ -12,7 +13,12 @@ router.get('/', (req,res,next) => {
 });
 
 router.post('/email', (req,res) => {
-  
+  let smtpConfig = {
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: 
+  }
+  let transporter = nodemailer.createTransport()
 });
 
 export default router;
