@@ -47,8 +47,9 @@ export default class Main extends React.Component {
 	              }
 	            }
 	          }
-	          onLogoutFinished={() => alert("logout.")}/>
-      		</TouchableElastic>
+	          onLogoutFinished={() => alert("logout.")}
+          />
+    		</TouchableElastic>
       </Image>
     );
   }

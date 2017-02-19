@@ -13,7 +13,6 @@ const {
 
 
 import rootReducer from './reducers';
-import Loading from './components/Loading';
 import Login from './components/Login';
 import Menu from './components/Menu';
 import Map from './components/Map';
@@ -21,7 +20,6 @@ import Form from './components/Form';
 import Capture from './components/Capture';
 
 const ROUTES = {
-  Loading,
   Login,
   Menu,
   Map,
@@ -50,11 +48,7 @@ export default class Main extends React.Component {
     AccessToken.getCurrentAccessToken()
       .then(data => {
         if (data) {
-<<<<<<< HEAD
           this.setState({ initialRouteIndex: 1 });
-=======
-          this.setState({ routeTitleAfterLoading: 'Menu' });
->>>>>>> 5ed6eddf05b92aef3dc93a98a2eb54d47c7d65b1
           AccessToken.refreshCurrentAccessTokenAsync();
         } else {
           this.setState({ initialRouteIndex: 0 });
