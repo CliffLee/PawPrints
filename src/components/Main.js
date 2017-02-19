@@ -20,7 +20,7 @@ import Form from '../containers/Form';
 import Capture from '../containers/Capture';
 import LostPetsList from '../containers/LostPetsList';
 import PetMatcher from '../containers/PetMatcher';
-import PetDetail from '../components/PetDetail';
+import PetDetail from '../containers/PetDetail';
 
 const ROUTES = {
   Login,
@@ -78,6 +78,7 @@ export default class Main extends React.Component {
             return (
               <Component
                 navigator={navigator}
+                data={route.data}
               />
             );
           }}

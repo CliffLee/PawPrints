@@ -76,7 +76,7 @@ class PetMatcher extends React.Component {
   onPress(data) {
     var delta = new Date().getTime() - this.lastPress;
     if(delta < 200) {
-      this.props.navigator.push({ title: 'PetDetail' });
+      this.props.navigator.push({ data, title: 'PetDetail' });
     }
     this.lastPress = new Date().getTime();
   }
