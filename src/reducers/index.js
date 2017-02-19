@@ -5,8 +5,13 @@ import {
   SET_INITIAL_REGION,
   SET_MAP_STATE,
   SET_USER_STATE,
-  SET_CAPTURE_STATE
+  SET_CAPTURE_STATE,
+  GET_LOST_LISTING
 } from '../actions'
+
+const defaultListingState = {
+  animals: []
+};
 
 const defaultFormState = {
   lastSeen: null,
@@ -19,7 +24,7 @@ const defaultMapState = {
   animalsWithinRegion: []
 };
 
-const deaultUserState = {
+const defaultUserState = {
   location: {
     latitude: 0,
     longitude: 0
@@ -34,8 +39,28 @@ const rootReducer = combineReducers({
   form: formReducer,
   map: mapReducer,
   capture: captureReducer,
-  initialRegion: initialRegionReducer
+  initialRegion: initialRegionReducer,
 });
+
+function listingReducer(state = defaultListingState, action){
+
+  console.log('within reducer, payload: ')
+  console.log(action.payload)
+
+  switch (action.type){
+
+   /* case GET_LOST_LISTING:
+      return{
+        ...state,
+        ...action.payload
+      }
+    default:
+      return state;*/
+
+  }
+
+}
+
 
 function formReducer(state = defaultFormState, action) {
   switch (action.type) {
