@@ -45,7 +45,6 @@ router.get('/nearby', (req, res, next) => {
       next(err);
       return;
     }
-    console.log(JSON.parse(entities));
   });
 });
 

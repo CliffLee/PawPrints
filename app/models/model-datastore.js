@@ -127,7 +127,7 @@ function list(limit, cb) {
   const q = ds.createQuery(kind)
     .limit(limit);
 
-    ds.runQuery(q, cb); 
+  return new Promise()ds.runQuery(q, cb); 
 }
 
 module.exports = {
