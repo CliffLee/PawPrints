@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { createAction } from 'redux-actions';
 
 const SET_FORM_STATE = 'SET_FORM_STATE';
 const SET_INITIAL_REGION = 'SET_INITIAL_REGION';
@@ -13,8 +14,8 @@ function getLostListing(){
   const url = 'https://pawprints-159112.appspot-preview.com/api/lost/nearby';
   var request = axios.get(url);
 
-  console.log('getting lost listing')
-  console.log(request);
+  //console.log('getting lost listing')
+  //console.log(request);
 
   return {
     type: GET_LOST_LISTING,
@@ -23,14 +24,18 @@ function getLostListing(){
 
 }
 
-function postLostAnimal(){
+function postLostAnimal(state){
   const url = 'https://pawprints-159112.appspot.com/api/lost/add';
-  var request = axios.get(url);
+  var request = axios.post(url, state);
 
-  return {
-    type: POST_LOST_ANIMAL,
-    payload: request
-  }
+  console.log('posting...')
+
+   return {
+     type: POST_LOST_ANIMAL,
+     payload: request
+   }
+
+ // return createAction(POST_LOST_ANIMAL, )
 
 }
 
