@@ -133,7 +133,7 @@ function list(limit) {
 
   return ds.runQuery(q)
   .then((results) => {
-    return results[0];
+    return results;
   });
 }
 

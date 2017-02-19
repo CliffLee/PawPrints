@@ -11,4 +11,8 @@ router.get('/', (req,res,next) => {
   res.send('hello');
 });
 
+router.post('/email', (req,res) => {
+  
+});
+
 export default router;
