@@ -139,7 +139,7 @@ function list(limit) {
         res(entities) 
       }
     })
-  }
+  })
 }
 
 module.exports = {
