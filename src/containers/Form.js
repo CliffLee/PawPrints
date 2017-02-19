@@ -11,7 +11,8 @@ import {
   LayoutAnimation,
   Modal,
   Image,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  TouchableOpacity
 } from 'react-native';
 
 import { width } from '../globalStyles';
@@ -87,11 +88,11 @@ class Form extends React.Component {
                 value={petDescription}
                 onChangeText={petDescription => setState({ petDescription })} />
 
-              <TouchableElastic
+              <TouchableOpacity
                 onPress={() => this.submit()}
                 style={styles.submitButton}>
                 <Text style={styles.submitText}>SUBMIT</Text>
-              </TouchableElastic>
+              </TouchableOpacity>
 
             </View>
           </View>
@@ -229,6 +230,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#eb9c22',
     width,
     position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
     bottom: 0,
     height: 50
   },
