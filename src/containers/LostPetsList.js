@@ -6,7 +6,8 @@ import {
   ListView,
   Image,
   Text,
-  StyleSheet
+  StyleSheet,
+  TouchableHighlight
 } from 'react-native';
 
 import { width } from '../globalStyles'
@@ -57,24 +58,25 @@ class LostPetsList extends React.Component {
   }
 
   renderRow(data, key) {
-    console.log('KEY', key)
     return (
-      <View
-        style={styles.row}
-        key={key}
-        >
-        <View style={[styles.centerY]}>
-          <Image
-            style={styles.image}
-            source={{ uri: data.imageUrl }}
-          />
+      <TouchableHighlight onPress={this.props.navigator.push({ title: 'PetDetail' })}>
+        <View
+          style={styles.row}
+          key={key}
+          >
+          <View style={[styles.centerY]}>
+            <Image
+              style={styles.image}
+              source={{ uri: data.imageUrl }}
+            />
+          </View>
+          <View style={[{ marginLeft: 10 }, styles.centerY]}>
+            <Text style={styles.infoText}>{`Name: ${data.name}`}</Text>
+            <Text style={styles.infoText}>{`breed: ${data.breed}`}</Text>
+            <Text style={styles.infoText}>{`weight: ${data.weight}`}</Text>
+          </View>
         </View>
-        <View style={[{ marginLeft: 10 }, styles.centerY]}>
-          <Text style={styles.infoText}>{`Name: ${data.name}`}</Text>
-          <Text style={styles.infoText}>{`breed: ${data.breed}`}</Text>
-          <Text style={styles.infoText}>{`weight: ${data.weight}`}</Text>
-        </View>
-      </View>
+      </TouchableHighlight>
     );
   }
 }
