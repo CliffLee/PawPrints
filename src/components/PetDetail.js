@@ -6,7 +6,7 @@ import {
 export default (data) => {
   return (
     <View>
-
+      
     </View>
   );
 }
