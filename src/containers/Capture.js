@@ -5,7 +5,8 @@ import {
   View,
   StyleSheet,
   Text,
-  Image
+  Image,
+  Animated
 } from 'react-native';
 
 import TouchableElastic from 'touchable-elastic';
@@ -15,6 +16,10 @@ import { height, width } from '../globalStyles';
 import { setCaptureState } from '../actions';
 
 class Capture extends React.Component {
+  componentWillMount() {
+    this.confirmButtonOpacity = new Animated.Value(0);
+  }
+
   render() {
     let { imagePath } = this.props.capture;
     let Background = imagePath ? (
@@ -41,7 +46,7 @@ class Capture extends React.Component {
             <TouchableElastic
               onPress={() => this.cancel()}
               >
-              <Text style={styles.cancel}>Cancel</Text>
+              <Text style={styles.sideButton}>Cancel</Text>
             </TouchableElastic>
           </View>
           <View style={styles.f1}>
@@ -52,7 +57,15 @@ class Capture extends React.Component {
               <View style={styles.innerButtonCircle} />
             </TouchableElastic>
           </View>
-          <View style={styles.f1} />
+          <View style={styles.f1}>
+            <TouchableElastic
+              onPress={() => this.confirm()}
+              >
+              <Animated.Text style={[styles.sideButton, { opacity: this.confirmButtonOpacity }]}>
+                Confirm
+              </Animated.Text>
+            </TouchableElastic>
+          </View>
         </View>
       </View>
     );
@@ -64,16 +77,30 @@ class Capture extends React.Component {
       return null
     }
     this.camera.capture()
-      .then(data => this.props.setState({ imagePath: data.path }))
+      .then(data => {
+        this.props.setState({ imagePath: data.path })
+        this.toggleConfirmButton(1);
+      })
       .catch(err => console.error(err));
   }
 
   cancel() {
     if (this.props.capture.imagePath) {
+      this.toggleConfirmButton(0);
       this.props.setState({ imagePath: '' });
     } else {
       this.props.navigator.pop();
     }
+  }
+
+  toggleConfirmButton(toValue) {
+    Animated.timing(this.confirmButtonOpacity, {
+      toValue
+    }).start();
+  }
+
+  confirm() {
+
   }
 }
 
@@ -114,7 +141,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center'
   },
-  cancel: {
+  sideButton: {
     fontSize: 20,
     color: '#fff'
   }
