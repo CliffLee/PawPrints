@@ -12,7 +12,7 @@ import TouchableElastic from 'touchable-elastic';
 import MapView from 'react-native-maps';
 
 import { getUserLocation, getAddress } from '../utils'
-import { setInitialRegion, setUserState, setMapState, setFormState } from '../actions';
+import { setInitialRegion, setUserState, setMapState, setFormState, getLostListing } from '../actions';
 import { width, height } from '../globalStyles';
 
 class Map extends React.Component {
@@ -50,8 +50,7 @@ class Map extends React.Component {
     let centerMarker = this.props.select ? (
       <Image
         style={{ height: 40, width: 40, position: 'absolute', zIndex: 99, left: width / 2 - 20, top: (height - 180) / 2 }}
-        source={require('../resources/images/icons/paw.png')}
-      />
+        source={require('../resources/images/icons/paw.png')}/>
     ) : null;
 
     return (
@@ -96,6 +95,7 @@ class Map extends React.Component {
       this.props.setUserState({ location });
       this.setState({region: location})
     });
+    this.props.getLostListing();
   }
 
   onHere() {
@@ -160,7 +160,8 @@ function mapDispatchToProps(dispatch) {
     setInitialRegion,
     setUserState,
     setFormState,
-    setState: setMapState
+    setState: setMapState,
+    getLostListing
   }, dispatch);
 }
 
