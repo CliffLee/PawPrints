@@ -35,7 +35,7 @@ const store = createStore(
 
 const initialRouteStack = [
   { title: 'Login' },
-  { title: 'Map' }
+  { title: 'Menu' }
 ];
 
 export default class Main extends React.Component {
