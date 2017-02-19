@@ -16,9 +16,13 @@ router.post('/email', (req,res) => {
   let smtpConfig = {
     host: 'smtp.gmail.com',
     port: 587,
-    secure: 
-  }
-  let transporter = nodemailer.createTransport()
+    secure: false,
+    auth: {
+      user: 'pawprintmailer@gmail.com',
+      pass: 'staypawes0me'
+    }
+  };
+  let transporter = nodemailer.createTransport(smtpConfig)
 });
 
 export default router;
