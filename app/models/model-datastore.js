@@ -39,7 +39,7 @@ function toDataStore(obj, nonIndexed) {
 }
 
 function create(data) {
-  const taskKey = ds.key('Lost Pet');
+  const taskKey = ds.key(kind);
   const entity = {
     key: taskKey,
     data: [
@@ -131,10 +131,7 @@ function list(limit) {
   const q = ds.createQuery(kind)
     .limit(limit);
 
-  return ds.runQuery(q)
-  .then((results) => {
-    return results[0];
-  });
+  return ds.runQuery(q);
 }
 
 module.exports = {
